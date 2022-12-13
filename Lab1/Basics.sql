@@ -1,4 +1,4 @@
-SELECT 'Witaj Œwiecie'
+SELECT 'Witaj Å’wiecie'
 
 SELECT * FROM dbo.Employees;
 
