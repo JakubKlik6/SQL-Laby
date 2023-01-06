@@ -1,0 +1,90 @@
+USE master;
+GO
+
+DROP DATABASE IF EXISTS ARKA_TEST;
+GO
+
+CREATE DATABASE ARKA_TEST;
+GO
+
+USE ARKA_TEST;
+GO
+
+-------------------------------
+DROP TABLE IF EXISTS Auta;
+GO
+
+CREATE TABLE Auta
+(
+ID_A int,
+Marka nvarchar(25) NOT NULL,
+Rok int,
+CONSTRAINT PK_Auta_ID_A PRIMARY KEY(ID_A)
+);
+GO
+
+-----------------
+
+DROP TABLE IF EXISTS Uzytkownicy;
+GO
+
+CREATE TABLE Uzytkownicy
+(
+ID_U INT IDENTITY(1,1) PRIMARY KEY,
+Imie nvarchar(20) NOT NULL,
+Nazwisko nvarchar(max) NOT NULL,
+Wiek tinyint NOT NULL,
+CONSTRAINT CHC_Uzytkownicy_Wiek CHECK(Wiek>=18 and Wiek <=95)
+)
+GO
+
+----------------------------
+
+DROP TABLE IF EXISTS Silnik;
+GO
+
+CREATE TABLE Silnik
+(
+ID_S int PRIMARY KEY,
+Typ nvarchar(25) DEFAULT('DIESEL'),
+Pojemnosc int NOT NULL,
+ID_nn int UNIQUE
+)
+GO
+
+---------------------------
+
+ALTER TABLE Auta
+ADD ID_U INT;
+GO
+
+ALTER TABLE Auta
+ADD ID_S INT;
+GO
+
+ALTER TABLE Auta
+ADD FOREIGN KEY(ID_U)
+REFERENCES Uzytkownicy(ID_U)
+
+ALTER TABLE Auta
+ADD FOREIGN KEY(ID_S)
+REFERENCES Silnik(ID_S)
+
+
+INSERT INTO Silnik VALUES (1,'Elektryk',2400,NULL);
+INSERT INTO Silnik VALUES (2,'Elektryk',2400,1);
+INSERT INTO Silnik(ID_S,Pojemnosc,ID_nn) VALUES (5,2400,2);
+
+INSERT INTO Uzytkownicy(Imie, Nazwisko,Wiek) VALUES ('Jan','Nowak',22);
+INSERT INTO Uzytkownicy(Imie, Nazwisko,Wiek) VALUES ('Anna','Stara',97);
+INSERT INTO Uzytkownicy(Imie, Nazwisko,Wiek) VALUES ('Aron','Cwal',55);
+INSERT INTO Uzytkownicy(Imie, Nazwisko,Wiek) VALUES ('Ola','Ladna',17);
+INSERT INTO Uzytkownicy(Imie, Nazwisko,Wiek) VALUES ('Marek','Gnom',37);
+
+INSERT INTO Auta VALUES (1,'BMW',2010,1,1);
+INSERT INTO Auta VALUES (2,'Merol',2020,3,2);
+INSERT INTO Auta VALUES (3,'Audi',2015,5,5);
+
+SELECT * FROM Auta;
+SELECT * FROM Silnik;
+SELECT * FROM Uzytkownicy;
