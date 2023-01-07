@@ -141,3 +141,11 @@ FROM Orders as o
 inner join customers as c
 on o.CustomerID=c.CustomerID
 where c.Country='Mexico'
+
+SELECT OrderID,EmployeeID,OrderDate
+FROM Orders
+WHERE CustomerID IN (
+SELECT CustomerID
+FROM Customers
+WHERE Country='Mexico'
+)
