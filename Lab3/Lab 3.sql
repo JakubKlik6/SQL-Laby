@@ -95,3 +95,40 @@ SELECT CAST(@v1 as char(5)) + @v2
 SELECT SUM(Quantity), AVG(UnitPrice),MAX(Discount), MIN(Discount),
 COUNT(*)
 FROM [Order Details]
+
+SELECT orderID,SUM(Quantity), AVG(UnitPrice),MAX(Discount), MIN(Discount),
+COUNT(*)
+FROM [Order Details]
+GROUP BY OrderID
+
+SELECT orderID,SUM(Quantity) as QuamtSUM, AVG(UnitPrice) as AVGprice,
+COUNT(*) as Rowno
+FROM [Order Details]
+GROUP BY OrderID
+HAVING SUM(Quantity) > 50
+
+//////////////////////////////////////////////
+
+SELECT city, region, country
+FROM Employees
+UNION
+SELECT city, region, country
+FROM Customers
+
+SELECT city, region, country
+FROM Employees
+UNION ALL
+SELECT city, region, country
+FROM Customers
+
+SELECT city, region, country
+FROM Employees
+INTERSECT
+SELECT city, region, country
+FROM Customers
+
+SELECT city, region, country
+FROM Employees
+EXCEPT
+SELECT city, region, country
+FROM Customers
