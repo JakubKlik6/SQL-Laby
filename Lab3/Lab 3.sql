@@ -66,5 +66,32 @@ SELECT CHARINDEX('SQL','SQL jest najlepszym przedmiotem SQL',2)
 
 //////////////////////////////////////////////
 
+SELECT city,region,country,
+city + ' ' + COALESCE(region, '') + ' ' + country
+FROM Customers
+
+SELECT city,region,country,
+city + ' ' + ISNULL(region, '') + ' ' + country
+FROM Customers
+
+SELECT city,region,country,
+CONCAT(city , ' ' , COALESCE(region, '') , ' ' , country)
+FROM Customers
+
+SELECT CONVERT(date,GETDATE())
+
+SELECT CONVERT(varchar(12),GETDATE(), 101)
+
+------
+DECLARE @v1 int = 5
+DECLARE @v2 char(5) = 'six'
+
+SELECT CAST(@v1 as char(5)) + @v2
 
 
+////////////////////////////////////////////////// Funkcje agregujące
+
+
+SELECT SUM(Quantity), AVG(UnitPrice),MAX(Discount), MIN(Discount),
+COUNT(*)
+FROM [Order Details]
