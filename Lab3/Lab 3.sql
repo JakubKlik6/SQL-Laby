@@ -132,3 +132,7 @@ FROM Employees
 EXCEPT
 SELECT city, region, country
 FROM Customers
+
+///////////////////////////////////////////
+
+
