@@ -136,3 +136,8 @@ FROM Customers
 ///////////////////////////////////////////
 
 
+SELECT OrderID,OrderDate,EmployeeID
+FROM Orders as o
+inner join customers as c
+on o.CustomerID=c.CustomerID
+where c.Country='Mexico'
